@@ -1,0 +1,76 @@
+name: Build e Deploy - DimDim Web App
+
+# Dispara a cada push na main (e também manualmente pela aba Actions).
+on:
+  push:
+    branches: [ main ]
+    paths-ignore:
+      - '**.md'
+      - 'docs/**'
+      - 'scripts/**'
+  workflow_dispatch:
+
+env:
+  DOTNET_VERSION: '10.0.x'
+  PROJETO: src/DimDim.Web/DimDim.Web.csproj
+
+jobs:
+  build:
+    name: Build (.NET)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Baixar o código
+        uses: actions/checkout@v4
+
+      - name: Instalar o SDK do .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+
+      - name: Restaurar dependências
+        run: dotnet restore ${{ env.PROJETO }}
+
+      - name: Publicar (Release)
+        run: dotnet publish ${{ env.PROJETO }} -c Release --no-restore -o ${{ github.workspace }}/publish
+
+      - name: Guardar o resultado do build
+        uses: actions/upload-artifact@v4
+        with:
+          name: dimdim-app
+          path: ${{ github.workspace }}/publish
+
+  deploy:
+    name: Deploy no Azure Web App
+    needs: build
+    # Só executa depois que a variável AZURE_WEBAPP_NAME for criada (passo 4 do README).
+    if: ${{ vars.AZURE_WEBAPP_NAME != '' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Verificar configuração do repositório
+        env:
+          NOME_APP: ${{ vars.AZURE_WEBAPP_NAME }}
+          PERFIL: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+        run: |
+          if [ -z "$NOME_APP" ] || [ -z "$PERFIL" ]; then
+            echo "::error::Configure a variável AZURE_WEBAPP_NAME e o secret AZURE_WEBAPP_PUBLISH_PROFILE (veja o README, passo 4)."
+            exit 1
+          fi
+
+      - name: Baixar o resultado do build
+        uses: actions/download-artifact@v4
+        with:
+          name: dimdim-app
+          path: publish
+
+      - name: Deploy no Azure Web App
+        id: deploy
+        uses: azure/webapps-deploy@v3
+        with:
+          app-name: ${{ vars.AZURE_WEBAPP_NAME }}
+          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+          package: publish
+
+      - name: Teste rápido (a aplicação responde e conecta no Azure SQL?)
+        run: |
+          curl --fail --silent --show-error --retry 12 --retry-delay 10 --retry-all-errors \
+            "${{ steps.deploy.outputs.webapp-url }}/health"

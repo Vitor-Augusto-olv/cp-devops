@@ -1,0 +1,17 @@
+@model Transacao
+@{
+    ViewData["Title"] = "Nova transação";
+}
+
+<div class="cabecalho-pagina">
+    <h1>Nova transação</h1>
+</div>
+
+<form asp-action="Create" method="post" class="formulario">
+    <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+    <partial name="_Campos" model="Model" />
+    <div class="form-acoes">
+        <button type="submit" class="btn btn-dim">Registrar transação</button>
+        <a class="btn btn-contorno" asp-action="Index">Cancelar</a>
+    </div>
+</form>

@@ -1,0 +1,56 @@
+@model IEnumerable<Transacao>
+@{
+    ViewData["Title"] = "Transações";
+    var filtro = ViewData["ClienteFiltro"] as string;
+}
+
+<div class="cabecalho-pagina">
+    <h1>Transações</h1>
+    <a class="btn btn-dim" asp-action="Create">Nova transação</a>
+</div>
+
+@if (!string.IsNullOrEmpty(filtro))
+{
+    <p class="filtro">Mostrando apenas as transações de <strong>@filtro</strong>. <a asp-action="Index">Ver todas</a></p>
+}
+
+@if (!Model.Any())
+{
+    <p class="vazio">Nenhuma transação registrada. <a asp-action="Create">Registre a primeira transação</a>; é preciso ter ao menos um cliente cadastrado.</p>
+}
+else
+{
+    <div class="tabela-rolagem">
+        <table class="table tabela-dim align-middle">
+            <thead>
+                <tr>
+                    <th>Data</th>
+                    <th>Cliente</th>
+                    <th>Descrição</th>
+                    <th>Tipo</th>
+                    <th class="text-end">Valor</th>
+                    <th>Status</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var t in Model)
+                {
+                    <tr>
+                        <td>@t.DataTransacao.ToString("dd/MM/yyyy HH:mm")</td>
+                        <td><a asp-controller="Clientes" asp-action="Details" asp-route-id="@t.ClienteId">@t.Cliente?.Nome</a></td>
+                        <td>@t.Descricao</td>
+                        <td>@t.Tipo.Nome()</td>
+                        <td class="text-end">@t.Valor.ToString("C2")</td>
+                        <td><span class="status status-@t.Status.ToString().ToLower()">@t.Status.Nome()</span></td>
+                        <td class="text-end acoes-linha">
+                            <a asp-action="Details" asp-route-id="@t.Id">Detalhes</a>
+                            <a asp-action="Edit" asp-route-id="@t.Id">Editar</a>
+                            <a asp-action="Delete" asp-route-id="@t.Id">Excluir</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}

@@ -1,0 +1,55 @@
+@model IEnumerable<Cliente>
+@{
+    ViewData["Title"] = "Clientes";
+}
+
+<div class="cabecalho-pagina">
+    <h1>Clientes</h1>
+    <a class="btn btn-dim" asp-action="Create">Novo cliente</a>
+</div>
+
+<form method="get" class="busca">
+    <input type="search" name="busca" value="@ViewData["Busca"]" class="form-control" placeholder="Buscar por nome ou e-mail" aria-label="Buscar clientes" />
+    <button class="btn btn-contorno" type="submit">Buscar</button>
+</form>
+
+@if (!Model.Any())
+{
+    <p class="vazio">Nenhum cliente encontrado. <a asp-action="Create">Cadastre o primeiro cliente</a> para começar a registrar transações.</p>
+}
+else
+{
+    <div class="tabela-rolagem">
+        <table class="table tabela-dim align-middle">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>E-mail</th>
+                    <th>Telefone</th>
+                    <th>Cadastro</th>
+                    <th>Situação</th>
+                    <th class="text-end">Transações</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var c in Model)
+                {
+                    <tr>
+                        <td><a asp-action="Details" asp-route-id="@c.Id">@c.Nome</a></td>
+                        <td>@c.Email</td>
+                        <td>@(string.IsNullOrWhiteSpace(c.Telefone) ? "-" : c.Telefone)</td>
+                        <td>@c.DataCadastro.ToString("dd/MM/yyyy HH:mm")</td>
+                        <td><span class="status @(c.Ativo ? "status-concluida" : "status-cancelada")">@(c.Ativo ? "Ativo" : "Inativo")</span></td>
+                        <td class="text-end">@c.Transacoes.Count</td>
+                        <td class="text-end acoes-linha">
+                            <a asp-action="Details" asp-route-id="@c.Id">Detalhes</a>
+                            <a asp-action="Edit" asp-route-id="@c.Id">Editar</a>
+                            <a asp-action="Delete" asp-route-id="@c.Id">Excluir</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}

@@ -1,0 +1,16 @@
+# Build
+bin/
+obj/
+publish/
+publish.zip
+*.user
+.vs/
+.vscode/
+
+# Segredos e arquivos locais - NUNCA versionar
+scripts/.dimdim.env
+publish-profile*.xml
+*.PublishSettings
+*.pubxml.user
+appsettings.Local.json
+.env

@@ -1,0 +1,107 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 780" width="1280" height="780" font-family="'Segoe UI', 'DejaVu Sans', Arial, Helvetica, sans-serif">
+  <defs>
+    <marker id="seta" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#2A2823"/>
+    </marker>
+    <marker id="setaAzul" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#0078D4"/>
+    </marker>
+  </defs>
+
+  <rect width="1280" height="780" fill="#FFFFFF"/>
+
+  <text x="40" y="52" font-size="28" font-weight="700" fill="#2A2823">DimDim: arquitetura macro na Microsoft Azure</text>
+  <text x="40" y="80" font-size="16" fill="#6B675C">Web App + Azure SQL Database + Application Insights, tudo em serviços PaaS (sem servidores para administrar)</text>
+
+  <!-- ===================== Coluna da esquerda ===================== -->
+  <rect x="40" y="130" width="200" height="90" rx="14" fill="#FFF3A6" stroke="#2A2823" stroke-width="2"/>
+  <text x="140" y="170" font-size="19" font-weight="700" text-anchor="middle" fill="#2A2823">Usuário</text>
+  <text x="140" y="196" font-size="14" text-anchor="middle" fill="#2A2823">navegador web</text>
+
+  <rect x="40" y="320" width="200" height="100" rx="14" fill="#F1F1EE" stroke="#2A2823" stroke-width="2"/>
+  <text x="140" y="362" font-size="17" font-weight="700" text-anchor="middle" fill="#2A2823">Repositório GitHub</text>
+  <text x="140" y="388" font-size="13" text-anchor="middle" fill="#2A2823">código, scripts e workflow</text>
+
+  <rect x="40" y="470" width="200" height="100" rx="14" fill="#F1F1EE" stroke="#2A2823" stroke-width="2"/>
+  <text x="140" y="512" font-size="19" font-weight="700" text-anchor="middle" fill="#2A2823">GitHub Actions</text>
+  <text x="140" y="538" font-size="13" text-anchor="middle" fill="#2A2823">build .NET 10 + deploy</text>
+
+  <rect x="40" y="620" width="200" height="100" rx="14" fill="#F1F1EE" stroke="#2A2823" stroke-width="2"/>
+  <text x="140" y="662" font-size="19" font-weight="700" text-anchor="middle" fill="#2A2823">Azure CLI</text>
+  <text x="140" y="688" font-size="13" text-anchor="middle" fill="#2A2823">scripts/01 a 05 (.sh)</text>
+
+  <!-- setas da coluna da esquerda -->
+  <line x1="140" y1="420" x2="140" y2="468" stroke="#2A2823" stroke-width="2.5" marker-end="url(#seta)"/>
+  <text x="152" y="450" font-size="13" fill="#2A2823">push na main</text>
+
+  <!-- ===================== Nuvem Azure ===================== -->
+  <rect x="340" y="110" width="900" height="620" rx="18" fill="#F3F8FE" stroke="#0078D4" stroke-width="2.5" stroke-dasharray="9 6"/>
+  <text x="362" y="140" font-size="16" font-weight="700" fill="#0078D4">Microsoft Azure  |  Resource Group rg-GRUPO-webapp  |  região Brazil South</text>
+
+  <!-- App Service -->
+  <rect x="370" y="170" width="340" height="250" rx="14" fill="#FFFFFF" stroke="#0078D4" stroke-width="2"/>
+  <text x="390" y="198" font-size="15" font-weight="700" fill="#0078D4">Azure App Service (Linux, plano B1)</text>
+  <rect x="390" y="215" width="300" height="185" rx="10" fill="#E3F0FC" stroke="#0078D4" stroke-width="2"/>
+  <text x="540" y="250" font-size="21" font-weight="700" text-anchor="middle" fill="#1B1B1B">Web App</text>
+  <text x="540" y="277" font-size="14" text-anchor="middle" fill="#1B1B1B">ASP.NET Core MVC (.NET 10)</text>
+  <text x="540" y="299" font-size="14" text-anchor="middle" fill="#1B1B1B">Front end + CRUD de Clientes</text>
+  <text x="540" y="319" font-size="14" text-anchor="middle" fill="#1B1B1B">e de Transações</text>
+  <text x="540" y="356" font-size="12" text-anchor="middle" fill="#55524A">App Settings: connection string do SQL</text>
+  <text x="540" y="374" font-size="12" text-anchor="middle" fill="#55524A">e do App Insights (nada no código)</text>
+
+  <!-- Azure SQL -->
+  <rect x="870" y="170" width="340" height="250" rx="14" fill="#FFFFFF" stroke="#0078D4" stroke-width="2"/>
+  <text x="890" y="198" font-size="15" font-weight="700" fill="#0078D4">Servidor SQL lógico (Azure SQL)</text>
+  <rect x="890" y="215" width="300" height="185" rx="10" fill="#E3F0FC" stroke="#0078D4" stroke-width="2"/>
+  <text x="1040" y="250" font-size="21" font-weight="700" text-anchor="middle" fill="#1B1B1B">Azure SQL Database</text>
+  <text x="1040" y="275" font-size="14" text-anchor="middle" fill="#1B1B1B">banco dimdimdb (PaaS, camada Basic)</text>
+  <rect x="908" y="298" width="110" height="46" rx="8" fill="#FFFFFF" stroke="#0078D4" stroke-width="2"/>
+  <text x="963" y="326" font-size="15" font-weight="600" text-anchor="middle" fill="#1B1B1B">Clientes</text>
+  <rect x="1062" y="298" width="110" height="46" rx="8" fill="#FFFFFF" stroke="#0078D4" stroke-width="2"/>
+  <text x="1117" y="326" font-size="15" font-weight="600" text-anchor="middle" fill="#1B1B1B">Transacoes</text>
+  <line x1="1018" y1="321" x2="1062" y2="321" stroke="#0078D4" stroke-width="2"/>
+  <text x="1040" y="313" font-size="12" font-weight="700" text-anchor="middle" fill="#0078D4">1:N</text>
+  <text x="1040" y="372" font-size="12" text-anchor="middle" fill="#55524A">FK ClienteId (sem exclusão em cascata)</text>
+
+  <!-- Monitoramento -->
+  <rect x="370" y="500" width="840" height="200" rx="14" fill="#FFFFFF" stroke="#0078D4" stroke-width="2"/>
+  <text x="390" y="528" font-size="15" font-weight="700" fill="#0078D4">Monitoramento</text>
+  <rect x="390" y="545" width="380" height="135" rx="10" fill="#EEEBFB" stroke="#5B4FC4" stroke-width="2"/>
+  <text x="580" y="580" font-size="21" font-weight="700" text-anchor="middle" fill="#1B1B1B">Application Insights</text>
+  <text x="580" y="607" font-size="14" text-anchor="middle" fill="#1B1B1B">Requests, dependências (chamadas ao SQL),</text>
+  <text x="580" y="627" font-size="14" text-anchor="middle" fill="#1B1B1B">exceções e logs de cada operação de CRUD</text>
+  <text x="580" y="656" font-size="12" text-anchor="middle" fill="#55524A">Live Metrics, Transaction search, Failures</text>
+  <rect x="810" y="545" width="380" height="135" rx="10" fill="#EEEBFB" stroke="#5B4FC4" stroke-width="2"/>
+  <text x="1000" y="580" font-size="21" font-weight="700" text-anchor="middle" fill="#1B1B1B">Log Analytics workspace</text>
+  <text x="1000" y="607" font-size="14" text-anchor="middle" fill="#1B1B1B">armazena a telemetria coletada</text>
+  <text x="1000" y="627" font-size="14" text-anchor="middle" fill="#1B1B1B">consultas em KQL (scripts/*.kql)</text>
+
+  <!-- ===================== Setas ===================== -->
+  <!-- Usuário -> Web App -->
+  <polyline points="240,175 290,175 290,265 388,265" fill="none" stroke="#2A2823" stroke-width="2.5" marker-end="url(#seta)"/>
+  <text x="246" y="166" font-size="13" font-weight="600" fill="#2A2823">HTTPS</text>
+
+  <!-- GitHub Actions -> Web App -->
+  <polyline points="240,520 315,520 315,350 388,350" fill="none" stroke="#2A2823" stroke-width="2.5" marker-end="url(#seta)"/>
+  <text x="246" y="510" font-size="13" font-weight="600" fill="#2A2823">deploy</text>
+  <text x="246" y="562" font-size="11" fill="#2A2823">via publish profile</text>
+
+  <!-- Azure CLI -> Resource Group -->
+  <line x1="240" y1="670" x2="338" y2="670" stroke="#2A2823" stroke-width="2.5" marker-end="url(#seta)"/>
+  <text x="246" y="660" font-size="13" font-weight="600" fill="#2A2823">cria tudo</text>
+
+  <!-- Web App -> SQL -->
+  <line x1="690" y1="300" x2="888" y2="300" stroke="#0078D4" stroke-width="2.5" marker-end="url(#setaAzul)"/>
+  <text x="790" y="266" font-size="12" font-weight="600" text-anchor="middle" fill="#0078D4">EF Core</text>
+  <text x="790" y="282" font-size="12" font-weight="600" text-anchor="middle" fill="#0078D4">TCP 1433 com TLS</text>
+
+  <!-- Web App -> Application Insights -->
+  <line x1="540" y1="400" x2="540" y2="543" stroke="#5B4FC4" stroke-width="2.5" marker-end="url(#seta)"/>
+  <text x="554" y="458" font-size="12" font-weight="600" fill="#5B4FC4">telemetria automática</text>
+  <text x="554" y="474" font-size="12" font-weight="600" fill="#5B4FC4">(OpenTelemetry)</text>
+
+  <!-- Application Insights -> Log Analytics -->
+  <line x1="770" y1="612" x2="808" y2="612" stroke="#5B4FC4" stroke-width="2.5" marker-end="url(#seta)"/>
+
+  <text x="40" y="758" font-size="13" fill="#6B675C">Segredos: a connection string do SQL e a do Application Insights ficam nas App Settings do Web App; o publish profile fica em GitHub Secrets. Nada sensível no código.</text>
+</svg>

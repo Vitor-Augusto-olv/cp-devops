@@ -1,0 +1,22 @@
+@model Cliente
+@{
+    ViewData["Title"] = "Excluir cliente";
+}
+
+<div class="cabecalho-pagina">
+    <h1>Excluir cliente</h1>
+</div>
+
+<div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+
+<p>Você vai excluir <strong>@Model.Nome</strong> (@Model.Email). Essa ação não pode ser desfeita.</p>
+@if (Model.Transacoes.Count > 0)
+{
+    <p class="text-secondary">Este cliente tem @Model.Transacoes.Count transação(ões) e só poderá ser excluído depois que elas forem removidas.</p>
+}
+
+<form asp-action="Delete" asp-route-id="@Model.Id" method="post" class="form-acoes">
+    <input type="hidden" name="id" value="@Model.Id" />
+    <button type="submit" class="btn btn-perigo">Excluir cliente</button>
+    <a class="btn btn-contorno" asp-action="Index">Cancelar</a>
+</form>

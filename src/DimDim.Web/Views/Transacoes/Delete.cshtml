@@ -1,0 +1,16 @@
+@model Transacao
+@{
+    ViewData["Title"] = "Excluir transação";
+}
+
+<div class="cabecalho-pagina">
+    <h1>Excluir transação</h1>
+</div>
+
+<p>Você vai excluir a transação <strong>@Model.Descricao</strong> de @Model.Valor.ToString("C2") do cliente @Model.Cliente?.Nome. Essa ação não pode ser desfeita.</p>
+
+<form asp-action="Delete" asp-route-id="@Model.Id" method="post" class="form-acoes">
+    <input type="hidden" name="id" value="@Model.Id" />
+    <button type="submit" class="btn btn-perigo">Excluir transação</button>
+    <a class="btn btn-contorno" asp-action="Index">Cancelar</a>
+</form>

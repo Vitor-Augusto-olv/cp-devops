@@ -1,0 +1,53 @@
+@model Cliente
+@{
+    ViewData["Title"] = Model.Nome;
+    var transacoes = Model.Transacoes.OrderByDescending(t => t.DataTransacao).ToList();
+}
+
+<div class="cabecalho-pagina">
+    <div>
+        <h1>@Model.Nome</h1>
+        <p class="sub">@Model.Email</p>
+    </div>
+    <div class="acoes">
+        <a class="btn btn-dim" asp-controller="Transacoes" asp-action="Create" asp-route-clienteId="@Model.Id">Nova transação</a>
+        <a class="btn btn-contorno" asp-action="Edit" asp-route-id="@Model.Id">Editar</a>
+        <a class="btn btn-perigo" asp-action="Delete" asp-route-id="@Model.Id">Excluir</a>
+    </div>
+</div>
+
+<dl class="ficha">
+    <div><dt>Telefone</dt><dd>@(string.IsNullOrWhiteSpace(Model.Telefone) ? "Não informado" : Model.Telefone)</dd></div>
+    <div><dt>Cadastrado em</dt><dd>@Model.DataCadastro.ToString("dd/MM/yyyy HH:mm")</dd></div>
+    <div><dt>Situação</dt><dd>@(Model.Ativo ? "Ativo" : "Inativo")</dd></div>
+</dl>
+
+<h2>Transações do cliente</h2>
+@if (transacoes.Count == 0)
+{
+    <p class="vazio">Este cliente ainda não tem transações.</p>
+}
+else
+{
+    <div class="tabela-rolagem">
+        <table class="table tabela-dim align-middle">
+            <thead>
+                <tr><th>Data</th><th>Descrição</th><th>Tipo</th><th class="text-end">Valor</th><th>Status</th></tr>
+            </thead>
+            <tbody>
+                @foreach (var t in transacoes)
+                {
+                    <tr>
+                        <td>@t.DataTransacao.ToString("dd/MM/yyyy HH:mm")</td>
+                        <td><a asp-controller="Transacoes" asp-action="Details" asp-route-id="@t.Id">@t.Descricao</a></td>
+                        <td>@t.Tipo.Nome()</td>
+                        <td class="text-end">@t.Valor.ToString("C2")</td>
+                        <td><span class="status status-@t.Status.ToString().ToLower()">@t.Status.Nome()</span></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
+
+<p><a asp-action="Index">Voltar para a lista de clientes</a></p>

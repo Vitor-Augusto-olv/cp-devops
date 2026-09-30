@@ -1,0 +1,35 @@
+@model Transacao
+
+<div class="mb-3">
+    <label asp-for="ClienteId" class="form-label"></label>
+    <select asp-for="ClienteId" asp-items="(SelectList)ViewBag.Clientes" class="form-select">
+        <option value="0">Selecione um cliente</option>
+    </select>
+    <span asp-validation-for="ClienteId" class="text-danger"></span>
+</div>
+<div class="mb-3">
+    <label asp-for="Descricao" class="form-label"></label>
+    <input asp-for="Descricao" class="form-control" autocomplete="off" />
+    <span asp-validation-for="Descricao" class="text-danger"></span>
+</div>
+<div class="mb-3">
+    <label asp-for="Valor" class="form-label"></label>
+    <input asp-for="Valor" class="form-control" inputmode="decimal" autocomplete="off" />
+    <div class="form-text">Use vírgula para os centavos. Exemplo: 150,50</div>
+    <span asp-validation-for="Valor" class="text-danger"></span>
+</div>
+<div class="row">
+    <div class="col-sm-6 mb-3">
+        <label asp-for="Tipo" class="form-label"></label>
+        <select asp-for="Tipo" asp-items="Html.GetEnumSelectList<TipoTransacao>()" class="form-select"></select>
+    </div>
+    <div class="col-sm-6 mb-3">
+        <label asp-for="Status" class="form-label"></label>
+        <select asp-for="Status" asp-items="Html.GetEnumSelectList<StatusTransacao>()" class="form-select"></select>
+    </div>
+</div>
+<div class="mb-3">
+    <label asp-for="DataTransacao" class="form-label"></label>
+    <input asp-for="DataTransacao" class="form-control" required />
+    <span asp-validation-for="DataTransacao" class="text-danger"></span>
+</div>

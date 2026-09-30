@@ -1,0 +1,28 @@
+// Consultas para o Application Insights > Logs (mostre no vídeo, uma de cada vez).
+// Os dados podem levar de 2 a 5 minutos para aparecer nas consultas.
+
+// 1) Requisições HTTP recebidas pelo Web App
+requests
+| where timestamp > ago(1h)
+| project timestamp, name, url, resultCode, duration
+| order by timestamp desc
+
+// 2) Chamadas ao Azure SQL (dependências) - monitoramento das transações no banco
+dependencies
+| where timestamp > ago(1h)
+| where type has "SQL" or type == "mssql" or target has "database.windows.net"
+| project timestamp, name, target, success, duration
+| order by timestamp desc
+
+// 3) Logs da aplicação: cada operação de CRUD e os comandos SQL executados pelo EF Core
+traces
+| where timestamp > ago(1h)
+| where message has_any ("Cliente", "Transação", "Executed DbCommand")
+| project timestamp, severityLevel, message
+| order by timestamp desc
+
+// 4) Falhas e exceções
+exceptions
+| where timestamp > ago(1h)
+| project timestamp, type, outerMessage
+| order by timestamp desc

@@ -1,0 +1,50 @@
+@model HomeViewModel
+@{
+    ViewData["Title"] = "Início";
+}
+
+<section class="abertura">
+    <div class="abertura-texto">
+        <h1>Pague com dimdim</h1>
+        <p class="lead">Cadastre clientes e acompanhe cada pagamento, recebimento e transferência em um só lugar.</p>
+        <div class="acoes">
+            <a class="btn btn-dim" asp-controller="Transacoes" asp-action="Create">Nova transação</a>
+            <a class="btn btn-contorno" asp-controller="Clientes" asp-action="Create">Novo cliente</a>
+        </div>
+        <p class="resumo">
+            <strong>@Model.TotalClientes</strong> clientes cadastrados,
+            <strong>@Model.TotalTransacoes</strong> transações registradas,
+            <strong>@Model.ValorConcluido.ToString("C2")</strong> movimentados em transações concluídas.
+        </p>
+    </div>
+
+    <div class="feed">
+        <h2>Últimas transações</h2>
+        @if (!Model.Recentes.Any())
+        {
+            <p class="vazio">Nenhuma transação ainda. <a asp-controller="Transacoes" asp-action="Create">Registre a primeira</a> e ela aparece aqui.</p>
+        }
+        else
+        {
+            <ul class="movimentos">
+                @foreach (var t in Model.Recentes)
+                {
+                    var entrada = t.Tipo == TipoTransacao.Recebimento;
+                    <li>
+                        <div class="mov-info">
+                            <a asp-controller="Transacoes" asp-action="Details" asp-route-id="@t.Id">@t.Descricao</a>
+                            <small>@t.Cliente?.Nome, @t.DataTransacao.ToString("dd/MM/yyyy HH:mm")</small>
+                        </div>
+                        <div class="mov-valor">
+                            <span class="valor @(entrada ? "entrada" : "saida")">@(entrada ? "+" : "-") @t.Valor.ToString("C2")</span>
+                            @if (t.Status != StatusTransacao.Concluida)
+                            {
+                                <span class="status status-@t.Status.ToString().ToLower()">@t.Status.Nome()</span>
+                            }
+                        </div>
+                    </li>
+                }
+            </ul>
+        }
+    </div>
+</section>
