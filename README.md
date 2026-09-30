@@ -1,4 +1,4 @@
-# DimDim Web App - 2º Checkpoint de DevOps Tools & Cloud Computing
+f# DimDim Web App - 2º Checkpoint de DevOps Tools & Cloud Computing
 
 Aplicação web em **ASP.NET Core MVC (.NET 10)** para a consultoria do nosso grupo apresentar ao CEO da DimDim (Steve Jobs): cadastro de clientes e registro de transações, com **front end**, dados no **Azure SQL Database**, deploy automatizado e monitoramento com **Application Insights**. Tudo roda na nuvem da Microsoft, em serviços PaaS.
 
@@ -6,10 +6,8 @@ Aplicação web em **ASP.NET Core MVC (.NET 10)** para a consultoria do nosso gr
 
 | Item | Informação |
 |---|---|
-| Nome do grupo | [PREENCHER: nome do grupo] |
-| Integrantes (RM e nome) | [PREENCHER: RM - Nome] |
-| | [PREENCHER: RM - Nome] |
-| | [PREENCHER: RM - Nome] |
+| Nome do grupo | C_A_V Enterprise |
+| Integrantes (RM e nome) | RM564227 Vitor Augusto|
 | Vídeo com as evidências | [PREENCHER: link do vídeo] |
 
 > Este projeto **não** é a aplicação da Sprint 3 e **não** roda em localhost: a entrega está publicada no Azure App Service.
